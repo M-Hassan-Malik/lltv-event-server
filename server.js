@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const originURL = [
   `http://localhost:3000`,
-  `https://lltv-events-front.netlify.app`,
+  `https://lltv-event-client.netlify.app`,
 ];
 app.use(
   cors({
@@ -14,6 +14,7 @@ app.use(
     credentials: true,
   })
 );
+
 
 app.use(express.static(__dirname + "/public/uploads"));
 app.use(express.urlencoded({ extended: false }));

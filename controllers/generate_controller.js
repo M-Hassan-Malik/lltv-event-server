@@ -264,6 +264,7 @@ exports.generateBlog = (req, res) => {
 		new Blog({
 			organizer_id: data.org_id,
 			title: data.title,
+			subtitle: data.subtitle,
 			details: data.details,
 			updated_at: new Date(),
 		}),

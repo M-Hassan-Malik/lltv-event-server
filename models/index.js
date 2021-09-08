@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 //  "mongodb+srv://admin:<password>@cluster0.9oejs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 //  "mongodb://localhost:27017/sales"
 
+try{
+
+
 mongoose.connect(
   "mongodb+srv://eventdb:pass1234@cluster0.bd5or.mongodb.net/eventdb",
   {
@@ -14,6 +17,10 @@ mongoose.connect(
     // connectTimeoutMS: 10000,
   }
 );
+}
+catch(e){
+  console.log('Mongoose Connection Error @catch:',e)
+}
 
 module.exports = {
   Event: require("./Event"),

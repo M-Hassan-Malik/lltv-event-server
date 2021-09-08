@@ -32,10 +32,9 @@ exports.signIn = (req, res) => {
       (err, resp) => {
         if (err) {
           res.send(err);
-        }
-        if (resp === null) {
+        } else if (resp === null) {
           res.send(false);
-        } else {
+        } else if (resp !== null) {
           const token = createToken(resp);
           let options = { maxAge: maxAge * 10000, path: "/" };
           res.status(200).json({
@@ -44,7 +43,7 @@ exports.signIn = (req, res) => {
             token: token,
             options: options,
           });
-        }
+        } else res.send(false);
       }
     );
   } catch (e) {
