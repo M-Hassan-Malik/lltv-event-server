@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const db = require("../models");
 const FAQ = require("../models/FAQ");
 const Blog = require("../models/Blog");
+const Event = require("../models/Event");
 
 exports.formsignUp = (req, res) => {
 	// let data = JSON.parse(req.body.data);

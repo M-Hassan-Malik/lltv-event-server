@@ -1,6 +1,6 @@
-const db = require("../models");
+const db = require("../../models");
 
-exports.getSuperAdmins = (req, res) => {
+exports.getAttendees = (req, res) => {
 	let { limit, startFrom } = req.body.data;
 
 	db.Registration.find()
