@@ -3,6 +3,7 @@ const db = require("../models");
 const FAQ = require("../models/FAQ");
 const Blog = require("../models/Blog");
 const Event = require("../models/Event");
+const Ticket = require("../models/Ticket");
 
 exports.formsignUp = (req, res) => {
 	// let data = JSON.parse(req.body.data);
@@ -13,7 +14,7 @@ exports.formsignUp = (req, res) => {
 };
 
 exports.genTicket = async (req, res) => {
-	var bookingAlreadyExists = false;
+	try{
 	const getTicketNo = (num) => {
 		return String(num).padStart(6, "0"); // '000001'
 	};
@@ -60,9 +61,12 @@ exports.genTicket = async (req, res) => {
 			}
 		} else res.status(200).json(false); //send false if ticket is already booked(Exists in database)
 	});
+}catch(e)
+{console.log(e)}
 };
 
 exports.generateEvent = (req, res) => {
+	try{
 	db.Event.create(
 		new Event({
 			organizer_id: req.body.id,
@@ -96,9 +100,12 @@ exports.generateEvent = (req, res) => {
 				res.send({ error: `error in Updating Event because else: ${err}` });
 		}
 	);
+}catch(e)
+{console.log(e)}
 };
 
 exports.updateEvent = async (req, res) => {
+	try{
 	await db.Event.findOneAndUpdate(
 		{ _id: req.body.eventId },
 		{
@@ -136,10 +143,13 @@ exports.updateEvent = async (req, res) => {
 				res.send({ error: `error in Updating Event at else because : ${err}` });
 		}
 	);
+}catch(e)
+{console.log(e)}
 };
 
 exports.generateSite = (req, res) => {
-	console.log("generateSite ran");
+
+	try{
 	db.Site.findOne({ organizer_id: req.body.id }, (err, result) => {
 		//Check if data exists or not
 		if (err) {
@@ -179,9 +189,12 @@ exports.generateSite = (req, res) => {
 			); //updating Ends
 		}
 	});
+}catch(e)
+{console.log(e)}
 };
 
 exports.generateSiteSocials = (req, res) => {
+	try{
 	data = JSON.parse(req.body.data);
 
 	db.Social.findOne({ organizer_id: data.id }, (err, result) => {
@@ -224,9 +237,13 @@ exports.generateSiteSocials = (req, res) => {
 			); //updating Ends
 		}
 	}); //findOne
+}catch(e)
+{console.log(e)}
 };
 
 exports.generateFAQs = (req, res) => {
+	try{
+
 
 	const data = JSON.parse(req.body.data);
 	const questions = [];
@@ -258,8 +275,11 @@ exports.generateFAQs = (req, res) => {
 			} else res.status(400).json({ error: "Error creating FAQs @else" });
 		}
 	);
+}catch(e)
+{console.log(e)}
 };
 exports.generateBlog = (req, res) => {
+	try{
 	const data = JSON.parse(req.body.data);
 	db.Blog.create(
 		new Blog({
@@ -278,4 +298,6 @@ exports.generateBlog = (req, res) => {
 			} else res.status(400).json({ error: "Error creating Blog @else" });
 		}
 	);
+}catch(e)
+{console.log(e)}
 };

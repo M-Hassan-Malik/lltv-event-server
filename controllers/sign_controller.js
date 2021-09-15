@@ -12,19 +12,23 @@ const createToken = (user) => {
 };
 
 exports.registration = (req, res) => {
+  try{
   let data = JSON.parse(req.body.data);
   console.log(data);
 
   const register = Register(data);
   db.Registration.create(register).then((resp) => res.status(200).json(resp));
   //db.disconnect();
+}catch(e)
+{console.log(e)}
 };
 
 exports.signIn = (req, res) => {
+  
+  try {
   let email = JSON.parse(req.body.email);
   let password = JSON.parse(req.body.password);
 
-  try {
     db.Registration.findOne(
       {
         $and: [{ email: { $eq: email } }, { password: { $eq: password } }],
@@ -52,12 +56,16 @@ exports.signIn = (req, res) => {
 };
 
 exports.logout = (req, res) => {
+  try{
   res
     .status(200)
     .json({ cookie: "jwtlogin", token: "", options: { maxAge: 1, path: "/" } });
+  }catch(e)
+  {console.log(e)}
 };
 
 exports.getOrganizer = (req, res) => {
+try{
   let id = String(req.params.org_id);
   db.Registration.findOne({ _id: id }, (err, result) => {
     if (err) {
@@ -68,9 +76,12 @@ exports.getOrganizer = (req, res) => {
       res.status(200).json(result);
     }
   });
+}catch(e)
+{console.log(e)}
 };
 
 exports.updateUserProfile = (req, res) => {
+  try{
   let data = JSON.parse(req.body.data);
 
   db.Registration.updateOne(
@@ -92,9 +103,12 @@ exports.updateUserProfile = (req, res) => {
       res.status(400).json({ error: err });
     } else res.status(400).json({ error: err });
   });
+}catch(e)
+{console.log(e)}
 };
 
 exports.authCheck = (req, res) => {
+  try{
   const token = req.params.cookies;
   //check json web token exists & is verified
   if (token) {
@@ -108,4 +122,6 @@ exports.authCheck = (req, res) => {
   } else {
     res.send({ message: "Token not found~!" });
   }
+}catch(e)
+{console.log(e)}
 };
