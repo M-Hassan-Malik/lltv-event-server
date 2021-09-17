@@ -21,6 +21,8 @@ const eventsSchema = mongoose.Schema({
   country: String,
   images: [],
   tickets_sold: String,
+  month: Number,
+  created_at: Date,
   updated_at: Date
 });
 

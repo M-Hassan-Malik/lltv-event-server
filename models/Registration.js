@@ -11,6 +11,8 @@ const RegistrationSchema = mongoose.Schema({
   postal: Number,
   contact: Number,
   company: String,
+  updated_at: Date,
+  created_at: Date,
 });
 
 module.exports = mongoose.model("Registration", RegistrationSchema);

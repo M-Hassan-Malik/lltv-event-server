@@ -6,7 +6,7 @@ const ticketSchema = mongoose.Schema({
   event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" }, // matches event_id and findAndUpdate the 'ticket_no'
   ticket_no: String,
   month: Number,
-  created_at: { type: Date, default: new Date() },
+  created_at: Date,
 });
 
 module.exports = mongoose.model("Ticket", ticketSchema);

@@ -14,8 +14,6 @@ const createToken = (user) => {
 exports.registration = (req, res) => {
   try{
   let data = JSON.parse(req.body.data);
-  console.log(data);
-
   const register = Register(data);
   db.Registration.create(register).then((resp) => res.status(200).json(resp));
   //db.disconnect();
@@ -95,6 +93,7 @@ exports.updateUserProfile = (req, res) => {
       dob: data.dob,
       postal: data.postal,
       contact: data.contact,
+      updated_at: new Date(),
     }
   ).exec((err, result) => {
     if (result) {
