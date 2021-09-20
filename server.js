@@ -33,9 +33,6 @@ app.use("/api/tickets/", require("./api/tickets.js"));
 
 app.use("/api/blogs/", require("./api/blog"));
 
-app.use("/api/super/organizers/", require("./api/superAdmin/organizers"));
-app.use("/api/super/attendees/", require("./api/superAdmin/attendees"));
-
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on ${originURL[0]} and ${originURL[1]}`);
 });

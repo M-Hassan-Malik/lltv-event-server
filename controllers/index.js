@@ -5,6 +5,4 @@ module.exports = {
 	Dashboard: require("./dashboard_controller"),
 	Ticket: require("./tickets_controller"),
 	Blog: require("./blog_controller"),
-	Organizer: require("./superAdminController/organizer_controller"),
-	Attendee: require("./superAdminController/attendee_controller"),
 };
