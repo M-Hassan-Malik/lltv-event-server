@@ -18,7 +18,7 @@ exports.getAllPerchasedTickets = async (req, res) => {
         },
       },
     ]).then((result) => {
-      // console.log("result is", result);
+       console.log("result is", result);
       res.status(200).json(result);
     });
   } catch (e) {

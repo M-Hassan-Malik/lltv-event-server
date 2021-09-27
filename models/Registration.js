@@ -14,6 +14,7 @@ const RegistrationSchema = mongoose.Schema({
   created_at: Date,
   updated_at: Date,
   month: Number,
+  country: {},
 });
 
 module.exports = mongoose.model("Registration", RegistrationSchema);

@@ -12,7 +12,7 @@ const createToken = (user) => {
 };
 
 exports.registration = (req, res) => {
-  console.log("object");
+  console.log("req.body.data",req.body.data);
   try {
     let data = JSON.parse(req.body.data);
     console.log("this", data);
@@ -99,6 +99,7 @@ exports.updateUserProfile = (req, res) => {
         dob: data.dob,
         postal: data.postal,
         contact: data.contact,
+        country: data.country,
         updated_at: new Date(),
       }
     ).exec((err, result) => {
