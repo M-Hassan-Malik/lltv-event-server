@@ -5,6 +5,7 @@ const ticketSchema = mongoose.Schema({
   attendee_id: { type: mongoose.Schema.Types.ObjectId, ref: "Registration" }, // use to find attendee (we get it when user sign's in)
   event_id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" }, // matches event_id and findAndUpdate the 'ticket_no'
   ticket_no: String,
+  country: {},
   month: Number,
   created_at: Date,
 });

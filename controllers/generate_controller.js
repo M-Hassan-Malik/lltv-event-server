@@ -23,6 +23,7 @@ exports.genTicket = async (req, res) => {
       organizer_id: JSON.parse(req.body.org_id),
       event_id: JSON.parse(req.body.event_id),
       attendee_id: JSON.parse(req.body.user_id),
+      country: JSON.parse(req.body.country),
     };
 
     db.Ticket.findOne({
@@ -47,6 +48,7 @@ exports.genTicket = async (req, res) => {
                       attendee_id: data.attendee_id,
                       event_id: data.event_id,
                       ticket_no: resp.tickets_sold,
+                      country: data.country,
                       month: new Date().getMonth(),
                       created_at: new Date(),
                     })

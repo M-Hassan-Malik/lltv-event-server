@@ -75,7 +75,6 @@ exports.getOrganizer = (req, res) => {
         res.send(err);
         console.log("Error is->", result);
       } else {
-        console.log("result is->", result);
         res.status(200).json(result);
       }
     });
