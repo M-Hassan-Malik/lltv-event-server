@@ -4,6 +4,8 @@ const FAQ = require("../models/FAQ");
 const Blog = require("../models/Blog");
 const Event = require("../models/Event");
 const Ticket = require("../models/Ticket");
+const Site = require("../models/Site");
+const Social = require("../models/Social");
 
 exports.formsignUp = (req, res) => {
   // let data = JSON.parse(req.body.data);
@@ -164,10 +166,11 @@ exports.generateSite = (req, res) => {
     db.Site.findOne({ organizer_id: req.body.id }, (err, result) => {
       //Check if data exists or not
       if (err) {
-        res.send({ error: e });
+        res.send({ error: err });
       }
       if (result === null) {
-        ////Create if data exists
+        ////Create if user's data exists
+        
         try {
           db.Site.create(
             new Site({
@@ -176,12 +179,13 @@ exports.generateSite = (req, res) => {
               slogan: req.body.slogan,
               logo: req.file,
             })
-          ).then((resp) => res.send("Data Saved"));
+          ).then((resultingData) => res.send("Data Saved"));
         } catch (e) {
-          res.send({ error: e });
+          console.log({e});
+          res.send({ error: e.toSting() });
         }
       } else if (result._id) {
-        //update if data exists
+        //update if user's data exists
         db.Site.updateOne(
           { organizer_id: req.body.id },
           {
@@ -211,7 +215,7 @@ exports.generateSiteSocials = (req, res) => {
 
     db.Social.findOne({ organizer_id: data.id }, (err, result) => {
       if (err) {
-        res.send({ error: e });
+        res.send({ error: err });
       }
       if (result === null) {
         try {
@@ -224,9 +228,9 @@ exports.generateSiteSocials = (req, res) => {
               twitter: data.twitter,
               linkedIn: data.linkedIn,
             })
-          ).then((resp) => res.send("Data Saved"));
+          ).then((resultingData) => res.send("Data Saved"));
         } catch (e) {
-          res.send({ error: e });
+          res.send({ error: e.toSting() });
         }
       } else if (result._id) {
         db.Social.updateOne(

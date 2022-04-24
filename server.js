@@ -21,6 +21,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req,res) => { 
+  res.json({
+    message: "running"
+  })
+})
+
+app.post('/', (req,res) => { 
+ res.json({
+   message: "running"
+ })
+})
+
 app.use("/api/logging/", require("./api/logging.js"));
 
 app.use("/api/generate/", require("./api/generate.js"));
