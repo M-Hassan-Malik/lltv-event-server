@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+const nodemailer = require("nodemailer");
 const db = require("../models");
 const Register = require("../models/Registration");
 const jwt = require("jsonwebtoken");
@@ -8,6 +7,38 @@ const maxAge = 2 * 24 * 60 * 60;
 const createToken = (user) => {
   return jwt.sign({ ...user }, "secretLogin", {
     expiresIn: maxAge,
+  });
+};
+
+exports.verify = (req, res) => {
+  const OTP = Math.floor(Math.random() * 90000) + 10000;
+  let emailTo = req.body.email.replace(/\s/g, "");
+  const transporter = nodemailer.createTransport({
+    service: "outlook",
+    auth: {
+      user: "auth_duty@outlook.com",
+      pass: "sonaMuskaan420!",
+    },
+  });
+  const options = {
+    from: "auth_duty@outlook.com",
+    to: emailTo,
+    subject: "EventO - Verification code",
+    html: `Dear Customer, Your OTP for "Event-O" is <br/><i style="color:blue; font-size: 200%;">${OTP}</i><br/>Use this Passcode to complete your account verification.<br/>Thank you.`,
+  };
+
+  transporter.sendMail(options, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: `an error has occured: ${err}` });
+      return;
+    } else {
+      res.status(200).json({
+        result: {
+          msg: `An verification OTP-code is sent to your email check/verify it please.`,
+          otp: OTP,
+        },
+      });
+    }
   });
 };
 

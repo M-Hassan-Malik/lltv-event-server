@@ -46,7 +46,7 @@ app.use("/api/tickets/", require("./api/tickets.js"));
 app.use("/api/blogs/", require("./api/blog"));
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server is running on ${originURL[0]} and ${originURL[1]}`);
+  console.log(`Server is running on http://localhost:5000 and ${originURL[1]}`);
 });
 
 //  - - - LIVE APIs - - -
