@@ -29,7 +29,7 @@ exports.verify = (req, res) => {
 
   transporter.sendMail(options, (err, result) => {
     if (err) {
-      res.status(400).json({ error: `an error has occured: ${err}` });
+      res.status(200).json({ error: `an error has occured: ${err}` });
       return;
     } else {
       res.status(200).json({
@@ -41,9 +41,22 @@ exports.verify = (req, res) => {
     }
   });
 };
+exports.verify1 = (req, res) => {
+  const OTP = Math.floor(Math.random() * 90000) + 10000;
+  let emailTo = req.body.email.replace(/\s/g, "");
+
+  res
+    .status(200)
+    .json({
+      result: {
+        msg: `An verification OTP-code is sent to your email check/verify it please.`,
+        otp: OTP,
+      },
+    });
+};
 
 exports.registration = (req, res) => {
-  console.log("req.body.data",req.body.data);
+  console.log("req.body.data", req.body.data);
   try {
     let data = JSON.parse(req.body.data);
     console.log("this", data);
