@@ -42,32 +42,14 @@ exports.verify = (req, res) => {
   });
 };
 
-// exports.verify1 = (req, res) => {
-//   const OTP = Math.floor(Math.random() * 90000) + 10000;
-//   let emailTo = req.body.email.replace(/\s/g, "");
+exports.registration = (req, res) => {
+  let data = JSON.parse(req.body.data);
+  console.log(data);
 
-//   res
-//     .status(200)
-//     .json({
-//       result: {
-//         msg: `An verification OTP-code is sent to your email check/verify it please.`,
-//         otp: OTP,
-//       },
-//     });
-// };
+  const register = Register(data);
+  db.Registration.create(register).then((resp) => res.status(200).json(resp));
 
-// exports.registration = (req, res) => {
-//   console.log("req.body.data", req.body.data);
-//   try {
-//     let data = JSON.parse(req.body.data);
-//     console.log("this", data);
-//     const register = Register(data);
-//     db.Registration.create(register).then((resp) => res.status(200).json(resp));
-//     //db.disconnect();
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+};
 
 exports.signIn = (req, res) => {
   try {
